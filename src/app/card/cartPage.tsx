@@ -63,7 +63,6 @@ const CartPage = () => {
           </div>
         </div>
       </div>
-      <br></br>
     </>
   );
 };
