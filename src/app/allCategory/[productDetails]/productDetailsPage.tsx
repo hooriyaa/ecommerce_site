@@ -412,11 +412,19 @@ const ProductDetailsPage = () => {
           </div>
 
           {/* Add to cart */}
-          <div className="flex justify-end">
-            <button className="bg-orange-500 text-white px-6 py-3 rounded">
-              Add to Cart
-            </button>
+          {/* Add to cart */}
+          <div className="flex justify-between items-center">
+            <span className="text-2xl font-semibold tracking-tight text-black">
+              ${cartItem.price * cartItem.quantity}
+            </span>
+            <ToastAddToCart cartItem={cartItem} />
           </div>
+
+          {/* Buy now button */}
+          <button className="group bg-gray-800 mt-4 w-full flex justify-center hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3">
+            <FaHeart className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
+            Buy Now
+          </button>
         </div>
       </div>
     </div>
