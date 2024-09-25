@@ -15,7 +15,7 @@ const Navbar = () => {
           href="/"
           className="text-xl sm:text-2xl md:text-4xl font-semibold hover:text-orange-400 flex-1 text-center sm:text-left"
         >
-          Women's Store
+          Women&apos;s Store
         </Link>
 
         {/* Navigation Links */}
@@ -23,26 +23,30 @@ const Navbar = () => {
           <Link href="/" className="navLink hover:text-orange-400 lg:text-xl">
             Home
           </Link>
-          <Link href="/allCategory" className="navLink hover:text-orange-400 lg:text-xl">
-           Products
+          <Link
+            href="/allCategory"
+            className="navLink hover:text-orange-400 lg:text-xl"
+          >
+            Products
           </Link>
         </div>
 
         {/* Cart Icon */}
         <Link href={"/card"} className="navLink">
-        <div className="flex gap-4 sm:ml-8 text-[26px]">
-          <div
-            className="relative cursor-pointer"
-            
-          >
-            < AiOutlineShoppingCart />
-            {cartCount.length>0 &&  <div className="absolute top-[-15px] right-[-10px]  bg-orange-500 w-[24px] h-[23px] rounded-full
-             text-black text-[14px] grid place-items-center  ">{cartCount.length}</div>}
-           
+          <div className="flex gap-4 sm:ml-8 text-[26px]">
+            <div className="relative cursor-pointer">
+              <AiOutlineShoppingCart />
+              {cartCount.length > 0 && (
+                <div
+                  className="absolute top-[-15px] right-[-10px]  bg-orange-500 w-[24px] h-[23px] rounded-full
+             text-black text-[14px] grid place-items-center  "
+                >
+                  {cartCount.length}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-          </Link>
-       
+        </Link>
       </div>
     </div>
   );

@@ -1,20 +1,15 @@
-import { products } from '@/app/utils/mock'
-import { Product } from '@/app/utils/types'
-import { createSlice } from '@reduxjs/toolkit'
+import { products } from "@/app/utils/mock";
+import { Product } from "@/app/utils/types";
+import { createSlice } from "@reduxjs/toolkit";
 
-
-const initialState: Product[] = products
+const initialState: Product[] = products;
 
 export const productSlice = createSlice({
-  name: 'product',
-  // `createSlice` will infer the state type from the `initialState` argument
+  name: "product",
   initialState,
-  reducers: {
+  reducers: {},
+});
 
-  },
-})
+export const {} = productSlice.actions;
 
-export const {  } = productSlice.actions
-
-
-export default productSlice.reducer
+export default productSlice.reducer;
