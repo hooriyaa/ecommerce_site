@@ -369,29 +369,29 @@ const ProductDetailsPage = () => {
               >
                 <option disabled>Select Size</option>
                 {product.availableSizes.map((size, index) => (
-              <option key={index} value={size}>
-                {size}
-              </option>
-            ))}
+                  <option key={index} value={size}>
+                    {size}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
 
-          {/* Quantity control */}
+          {/* Quantity selector */}
           <div className="flex items-center mb-5">
             <span className="mr-3 text-base font-semibold text-black">
               Quantity
             </span>
-            <div className="flex items-center border rounded">
+            <div className="flex items-center">
               <button
-                className="p-2 border-r"
+                className="border rounded-full p-2"
                 onClick={() => handleQuantityChange("decrement")}
               >
                 <FaMinus />
               </button>
-              <span className="px-3">{cartItem.quantity}</span>
+              <span className="mx-2 text-base">{cartItem.quantity}</span>
               <button
-                className="p-2 border-l"
+                className="border rounded-full p-2"
                 onClick={() => handleQuantityChange("increment")}
               >
                 <FaPlus />
@@ -399,19 +399,17 @@ const ProductDetailsPage = () => {
             </div>
           </div>
 
-          
-          {/* Add to Cart button */}
-          <div className="flex justify-between items-center">
-            <span className="text-2xl font-semibold tracking-tight text-black">
-              ${cartItem.price * cartItem.quantity}
-            </span>
-            <ToastAddToCart cartItem={cartItem} />
-          </div>
-
-          {/* Buy now button */}
-          <button className="group bg-gray-800 mt-4 w-full flex justify-center hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3">
-            <FaHeart className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
-            Buy Now
+          {/* Add to cart button */}
+          <button
+            className="mt-4 py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-200"
+            onClick={() => {
+              // Function to handle adding item to cart (you'll need to implement this)
+              console.log("Item added to cart:", cartItem);
+              // Show toast notification
+              // ToastAddToCart(cartItem); // Uncomment when ToastAddToCart is implemented
+            }}
+          >
+            Add to Cart <FaHeart className="inline-block ml-1" />
           </button>
         </div>
       </div>
