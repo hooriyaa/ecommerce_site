@@ -1,7 +1,6 @@
 "use client";
 
 import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
-import ToastAddToCart from "@/components/toastAddToCart";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState } from "react";
