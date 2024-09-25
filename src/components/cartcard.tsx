@@ -82,20 +82,20 @@ const Cartcard = () => {
               </div>
 
               {/* Desktop Price and Delete */}
-              <div className="md:hidden flex flex-col gap-2 mt-3 items-start">
-  <h2 className="text-lg text-black font-semibold line-clamp-1 leading-none">
-    <span>Price:&nbsp;</span>
-    {`$${item.price * item.quantity}`}
-  </h2>
-  <FaRegTrashAlt
-    onClick={() => dispatch(deleteItem(item.uuid))}
-    className="text-xl text-red-500 cursor-pointer leading-none line-clamp-1 font-semibold"
-  />
-</div>
+              <div className="hidden flex-col md:flex gap-2 mt-3 items-start">
+                <h2 className="text-lg text-black font-semibold line-clamp-1 leading-none">
+                  <span>Price:&nbsp;</span>
+                  {`$${item.price * item.quantity}`}
+                </h2>
+                <FaRegTrashAlt
+                  onClick={() => dispatch(deleteItem(item.uuid))}
+                  className="text-xl text-red-500 cursor-pointer leading-none line-clamp-1 font-semibold"
+                />
+              </div>
             </div>
           </div>
         ))
-      ) : (
+      ) :  (
         <div className="flex flex-col items-center justify-center pb-6">
           <Image
             src="/pictures/emptyCart.jpg" // Replace with your empty cart image

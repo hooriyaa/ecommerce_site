@@ -1,6 +1,6 @@
 "use client";
 
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
 import ToastAddToCart from "@/components/toastAddToCart";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -298,7 +298,7 @@ const ProductDetailsPage = () => {
         {/* Product image */}
         <div className="flex-shrink-0 lg:w-1/2 w-1/2 max-h-[500px] ml-16 md:-ml-16 rounded mb-6 lg:mb-0 overflow-hidden">
           <Image
-            src={product.src}
+            src={product.src} // Ensure it's a string
             alt={product.alt}
             className="w-full h-full object-contain object-center"
             width={600}
@@ -308,52 +308,69 @@ const ProductDetailsPage = () => {
 
         {/* Product details */}
         <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 flex flex-col">
-          {/* Category */}
-          <h2 className="text-sm font-semibold text-gray-500 tracking-widest">
-            {product.allCategory}
-          </h2>
+          <h2 className="text-sm font-semibold text-gray-500 tracking-widest">{product.allCategory}</h2>
+          <h1 className="mt-2 text-2xl lg:text-3xl font-semibold tracking-tight mb-1">{product.title}</h1>
+          <p className="mt-2 leading-relaxed text-base font-normal text-black line-clamp-2">{product.description}</p>
 
-          {/* Product title */}
-          <h1 className="mt-2 text-2xl lg:text-3xl font-semibold tracking-tight mb-1">
-            {product.title}
-          </h1>
-
-          {/* Description */}
-          <p className="mt-2 leading-relaxed text-base font-normal text-black line-clamp-2">
-            {product.description}
-          </p>
-
-          {/* Color and Size selection */}
+          {/* Color selection */}
           <div className="flex mt-6 items-center mb-5">
-            <span className="mr-3 text-base font-semibold">Color:</span>
-            <select
-              className="border border-gray-300 rounded-md p-2"
-              onChange={(e) => setCartItem({ ...cartItem, color: e.target.value })}
-            >
-              {product.availableColors.map((color, index) => (
-                <option key={index} value={color}>
-                  {color}
-                </option>
-              ))}
-            </select>
+            <span className="mr-3 text-base font-semibold text-black">Color</span>
+            {product.availableColors.map((color, index) => (
+              <button
+                key={index}
+                className={`border-2 rounded-full w-6 h-6 focus:border-black focus:outline-none active:border-black mr-1 capitalize`}
+                style={{ backgroundColor: color }}
+                onClick={() => setCartItem({ ...cartItem, color })}
+              />
+            ))}
           </div>
 
-          <div className="flex mt-6 items-center mb-5">
-            <span className="mr-3 text-base font-semibold">Size:</span>
-            <select
-              className="border border-gray-300 rounded-md p-2"
-              onChange={(e) => setCartItem({ ...cartItem, size: e.target.value })}
-            >
-              {product.availableSizes.map((size, index) => (
-                <option key={index} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
+          {/* Size selection */}
+          <div className="flex items-center mb-5">
+            <span className="mr-3 text-base font-semibold text-black">Size</span>
+            <div className="form-control w-fit">
+              <select
+                className="select select-bordered"
+                defaultValue={cartItem.size}
+                onChange={(e) => setCartItem({ ...cartItem, size: e.target.value })}
+              >
+                <option disabled>Select Size</option>
+                {product.availableSizes.map((size, index) => (
+                  <option key={index} value={size}>{size}</option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          {/* Add to Cart Button */}
-          <ToastAddToCart cartItem={cartItem} />
+          {/* Quantity control */}
+          <div className="flex items-center mt-4">
+            <span className="mr-3 text-base font-semibold">Quantity:</span>
+            <button
+              className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
+              onClick={() => setCartItem({ ...cartItem, quantity: Math.max(1, cartItem.quantity - 1) })}
+            >
+              <FaMinus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
+            </button>
+            <div className="mx-2">{cartItem.quantity}</div>
+            <button
+              className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
+              onClick={() => setCartItem({ ...cartItem, quantity: cartItem.quantity + 1 })}
+            >
+              <FaPlus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
+            </button>
+          </div>
+
+          {/* Add to cart */}
+          <div className="flex justify-between items-center">
+            <span className="text-2xl font-semibold tracking-tight text-black">${cartItem.price * cartItem.quantity}</span>
+            <ToastAddToCart cartItem={cartItem} />
+          </div>
+
+          {/* Buy now button */}
+          <button className="group bg-gray-800 mt-4 w-full flex justify-center hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3">
+            <FaHeart className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
+            Buy Now
+          </button>
         </div>
       </div>
     </div>
