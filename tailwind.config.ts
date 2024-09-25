@@ -53,7 +53,6 @@ const config: Config = {
   			}
   		},
   		container: {
-  			center: 'true',
   			padding: '15px'
   		},
   		borderRadius: {
