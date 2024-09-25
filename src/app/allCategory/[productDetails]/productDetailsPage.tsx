@@ -268,7 +268,7 @@ const products = [
   },
 ];
 
-const productDetailsPage = () => {
+const ProductDetailsPage = () => {
   const params = useParams(); // Get dynamic route params
   const { productDetails } = params;
 
@@ -403,4 +403,4 @@ const productDetailsPage = () => {
   );
 };
 
-export default productDetailsPage;
+export default ProductDetailsPage;
