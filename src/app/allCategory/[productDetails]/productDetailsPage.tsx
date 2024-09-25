@@ -17,7 +17,7 @@ const products = [
     price: 29.23,
     allCategory: "Bags",
     productDetails: "Gym-Bag-for-Women",
-    availableColors: ["pink","black","#FCF5ED","blue"],
+    availableColors: ["pink", "black", "#FCF5ED", "blue"],
     availableSizes: ["Free Size"],
     quantity: 1,
   },
@@ -207,7 +207,7 @@ const products = [
     alt: "Gold Cubic Zirconia Bezel Hoops",
     title: "Gold Cubic Zirconia Bezel Hoops",
     productDetails: "Gold-Cubic-Bezel-Hoops",
-    price: 40.90,
+    price: 40.9,
     allCategory: "Accessories",
     description:
       "Every accessories closet needs hoop earrings. And if you're already stocked up on classic hoops, might we tempt you with these studded hoop earrings for a statement look? With bezels surrounding the shape, you'll be sure to turn heads each time you wear them. ",
@@ -250,8 +250,8 @@ const products = [
     allCategory: "Clothing",
     description:
       "Legendary Whitetails Women's Trail Guide Fleece Button Down Shirt",
-    availableColors: ["green", "red","blue"],
-    availableSizes: ["S", "M", "L", "XL","XXL"],
+    availableColors: ["green", "red", "blue"],
+    availableSizes: ["S", "M", "L", "XL", "XXL"],
     quantity: 1,
   },
   {
@@ -263,8 +263,8 @@ const products = [
     allCategory: "Belt",
     description:
       "Sam Edelman Women's Imitation Pearl Embellished Double-E Logo Plaque Buckle Leather Belt for Jeans, Dresses and Trousers",
-    availableColors: [ "#FFFBDA","Black"],
-    availableSizes: ["S", "M", "L", "XL","XXL"],
+    availableColors: ["#FFFBDA", "Black"],
+    availableSizes: ["S", "M", "L", "XL", "XXL"],
     quantity: 1,
   },
 ];
@@ -280,15 +280,26 @@ const ProductDetailsPage = () => {
     return <div>Product not found</div>;
   }
 
+  type CartItem = {
+    title: string;
+    image: string;
+    productDetails: string;
+    price: number;
+    allCategory: string;
+    size: string;
+    color: string;
+    quantity: number;
+  };
+
   // Update cart item correctly
-  const [cartItem, setCartItem] = useState({
+  const [cartItem, setCartItem] = useState<CartItem>({
     title: product.title,
     image: product.src,
     productDetails: product.productDetails,
     price: product.price,
     allCategory: product.allCategory,
-    size: product.availableSizes[0],
-    color: product.availableColors[0],
+    size: product.availableSizes[0] || "",  // Ensure there is a default value
+    color: product.availableColors[0] || "", // Ensure there is a default value
     quantity: product.quantity,
   });
 
@@ -308,13 +319,21 @@ const ProductDetailsPage = () => {
 
         {/* Product details */}
         <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 flex flex-col">
-          <h2 className="text-sm font-semibold text-gray-500 tracking-widest">{product.allCategory}</h2>
-          <h1 className="mt-2 text-2xl lg:text-3xl font-semibold tracking-tight mb-1">{product.title}</h1>
-          <p className="mt-2 leading-relaxed text-base font-normal text-black line-clamp-2">{product.description}</p>
+          <h2 className="text-sm font-semibold text-gray-500 tracking-widest">
+            {product.allCategory}
+          </h2>
+          <h1 className="mt-2 text-2xl lg:text-3xl font-semibold tracking-tight mb-1">
+            {product.title}
+          </h1>
+          <p className="mt-2 leading-relaxed text-base font-normal text-black line-clamp-2">
+            {product.description}
+          </p>
 
           {/* Color selection */}
           <div className="flex mt-6 items-center mb-5">
-            <span className="mr-3 text-base font-semibold text-black">Color</span>
+            <span className="mr-3 text-base font-semibold text-black">
+              Color
+            </span>
             {product.availableColors.map((color, index) => (
               <button
                 key={index}
@@ -327,16 +346,22 @@ const ProductDetailsPage = () => {
 
           {/* Size selection */}
           <div className="flex items-center mb-5">
-            <span className="mr-3 text-base font-semibold text-black">Size</span>
+            <span className="mr-3 text-base font-semibold text-black">
+              Size
+            </span>
             <div className="form-control w-fit">
               <select
                 className="select select-bordered"
                 defaultValue={cartItem.size}
-                onChange={(e) => setCartItem({ ...cartItem, size: e.target.value })}
+                onChange={(e) =>
+                  setCartItem({ ...cartItem, size: e.target.value })
+                }
               >
                 <option disabled>Select Size</option>
                 {product.availableSizes.map((size, index) => (
-                  <option key={index} value={size}>{size}</option>
+                  <option key={index} value={size}>
+                    {size}
+                  </option>
                 ))}
               </select>
             </div>
@@ -347,14 +372,21 @@ const ProductDetailsPage = () => {
             <span className="mr-3 text-base font-semibold">Quantity:</span>
             <button
               className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
-              onClick={() => setCartItem({ ...cartItem, quantity: Math.max(1, cartItem.quantity - 1) })}
+              onClick={() =>
+                setCartItem((prev) => ({
+                  ...prev,
+                  quantity: Math.max(1, prev.quantity - 1), // Prevent going below 1
+                }))
+              }
             >
               <FaMinus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
             </button>
             <div className="mx-2">{cartItem.quantity}</div>
             <button
               className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
-              onClick={() => setCartItem({ ...cartItem, quantity: cartItem.quantity + 1 })}
+              onClick={() =>
+                setCartItem({ ...cartItem, quantity: cartItem.quantity + 1 })
+              }
             >
               <FaPlus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
             </button>
@@ -362,7 +394,9 @@ const ProductDetailsPage = () => {
 
           {/* Add to cart */}
           <div className="flex justify-between items-center">
-            <span className="text-2xl font-semibold tracking-tight text-black">${cartItem.price * cartItem.quantity}</span>
+            <span className="text-2xl font-semibold tracking-tight text-black">
+              ${cartItem.price * cartItem.quantity}
+            </span>
             <ToastAddToCart cartItem={cartItem} />
           </div>
 
