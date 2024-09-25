@@ -369,10 +369,10 @@ const ProductDetailsPage = () => {
               >
                 <option disabled>Select Size</option>
                 {product.availableSizes.map((size, index) => (
-                  <option key={index} value={size}>
-                    {size}
-                  </option>
-                ))}
+              <option key={index} value={size}>
+                {size}
+              </option>
+            ))}
               </select>
             </div>
           </div>
@@ -382,24 +382,25 @@ const ProductDetailsPage = () => {
             <span className="mr-3 text-base font-semibold text-black">
               Quantity
             </span>
-            <div className="flex items-center border border-gray-300 rounded">
+            <div className="flex items-center border rounded">
               <button
+                className="p-2 border-r"
                 onClick={() => handleQuantityChange("decrement")}
-                       className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
               >
-                <FaMinus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300"/>
+                <FaMinus />
               </button>
-              <span className="px-4">{cartItem.quantity}</span>
+              <span className="px-3">{cartItem.quantity}</span>
               <button
+                className="p-2 border-l"
                 onClick={() => handleQuantityChange("increment")}
-               className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
               >
-                <FaPlus  className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
+                <FaPlus />
               </button>
             </div>
           </div>
 
-          {/* Add to cart */}
+          
+          {/* Add to Cart button */}
           <div className="flex justify-between items-center">
             <span className="text-2xl font-semibold tracking-tight text-black">
               ${cartItem.price * cartItem.quantity}
