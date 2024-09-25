@@ -343,54 +343,30 @@ const ProductDetailsPage = () => {
             <span className="mr-3 text-base font-semibold text-black">
               Color
             </span>
-            {product.availableColors.map((color, index) => (
-              <button
-                key={index}
-                className={`border-2 rounded-full w-6 h-6 focus:border-black focus:outline-none active:border-black mr-1 capitalize`}
-                style={{ backgroundColor: color }}
-                onClick={() => setCartItem({ ...cartItem, color })}
-              />
-            ))}
-          </div>
-
-          {/* Size selection */}
-          <div className="flex items-center mb-5">
-            <span className="mr-3 text-base font-semibold text-black">
-              Size
-            </span>
-            <div className="form-control w-fit">
-              <select
-                className="select select-bordered"
-                defaultValue={cartItem.size}
-                onChange={(e) =>
-                  setCartItem({ ...cartItem, size: e.target.value })
-                }
-              >
-                <option disabled>Select Size</option>
-                {product.availableSizes.map((size, index) => (
+            {product.availableSizes.map((size, index) => (
                   <option key={index} value={size}>
                     {size}
                   </option>
                 ))}
-              </select>
+              </div >
             </div>
           </div>
 
-          {/* Quantity selector */}
+          {/* Quantity controls */}
           <div className="flex items-center mb-5">
             <span className="mr-3 text-base font-semibold text-black">
               Quantity
             </span>
-            <div className="flex items-center">
+            <div className="flex items-center border rounded">
               <button
-                className="border rounded-full p-2"
+                className="p-2"
                 onClick={() => handleQuantityChange("decrement")}
               >
                 <FaMinus />
               </button>
-              <span className="mx-2 text-base">{cartItem.quantity}</span>
+              <span className="p-2">{cartItem.quantity}</span>
               <button
-                className="border rounded-full p-2"
+                className="p-2"
                 onClick={() => handleQuantityChange("increment")}
               >
                 <FaPlus />
@@ -398,21 +374,21 @@ const ProductDetailsPage = () => {
             </div>
           </div>
 
-          {/* Add to cart button */}
+          {/* Price display */}
+          <div className="mt-4 text-2xl font-semibold text-black">
+            ${cartItem.price.toFixed(2)}
+          </div>
+
+          {/* Add to Cart button */}
           <button
-            className="mt-4 py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-200"
-            onClick={() => {
-              // Function to handle adding item to cart (you'll need to implement this)
-              console.log("Item added to cart:", cartItem);
-              // Show toast notification
-              // ToastAddToCart(cartItem); // Uncomment when ToastAddToCart is implemented
-            }}
+            className="mt-6 bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+            onClick={() => alert("Added to Cart!")}
           >
-            Add to Cart <FaHeart className="inline-block ml-1" />
+            Add to Cart <FaHeart className="inline ml-2" />
           </button>
         </div>
-      </div>
-    </div>
+     
+   
   );
 };
 
