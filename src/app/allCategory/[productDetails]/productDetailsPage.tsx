@@ -276,9 +276,17 @@ const ProductDetailsPage = () => {
   // Find the product by matching the dynamic route param
   const product = products.find((p) => p.productDetails === productDetails);
 
-  if (!product) {
-    return <div>Product not found</div>;
-  }
+  // Ensure product is available
+  const initialProduct = product || {
+    title: "",
+    src: "",
+    productDetails: "",
+    price: 0,
+    allCategory: "",
+    availableSizes: [],
+    availableColors: [],
+    quantity: 1,
+  };
 
   type CartItem = {
     title: string;
@@ -291,16 +299,16 @@ const ProductDetailsPage = () => {
     quantity: number;
   };
 
-  // Update cart item correctly
+  // Initialize cart item state
   const [cartItem, setCartItem] = useState<CartItem>({
-    title: product.title,
-    image: product.src,
-    productDetails: product.productDetails,
-    price: product.price,
-    allCategory: product.allCategory,
-    size: product.availableSizes[0] || "", // Ensure there is a default value
-    color: product.availableColors[0] || "", // Ensure there is a default value
-    quantity: product.quantity,
+    title: initialProduct.title,
+    image: initialProduct.src,
+    productDetails: initialProduct.productDetails,
+    price: initialProduct.price,
+    allCategory: initialProduct.allCategory,
+    size: initialProduct.availableSizes[0] || "", // Ensure default value
+    color: initialProduct.availableColors[0] || "", // Ensure default value
+    quantity: initialProduct.quantity,
   });
 
   const handleQuantityChange = (action: "increment" | "decrement") => {
@@ -313,13 +321,17 @@ const ProductDetailsPage = () => {
     });
   };
 
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
   return (
     <div className="container mx-auto px-5 py-10">
       <div className="flex flex-col md:flex-row lg:space-x-8 space-y-6 lg:space-y-0 lg:w-4/5 mx-auto">
         {/* Product image */}
         <div className="flex-shrink-0 lg:w-1/2 w-1/2 max-h-[500px] ml-16 md:-ml-16 rounded mb-6 lg:mb-0 overflow-hidden">
           <Image
-            src={product.src} // Ensure it's a string
+            src={product.src}
             alt={product.alt}
             className="w-full h-full object-contain object-center"
             width={600}
@@ -347,7 +359,7 @@ const ProductDetailsPage = () => {
             {product.availableColors.map((color, index) => (
               <button
                 key={index}
-                className={`border-2 rounded-full w-6 h-6 focus:border-black focus:outline-none active:border-black mr-1 capitalize`}
+                className="border-2 rounded-full w-6 h-6 focus:border-black focus:outline-none active:border-black mr-1 capitalize"
                 style={{ backgroundColor: color }}
                 onClick={() => setCartItem({ ...cartItem, color })}
               />
@@ -400,18 +412,11 @@ const ProductDetailsPage = () => {
           </div>
 
           {/* Add to cart */}
-          <div className="flex justify-between items-center">
-            <span className="text-2xl font-semibold tracking-tight text-black">
-              ${cartItem.price * cartItem.quantity}
-            </span>
-            <ToastAddToCart cartItem={cartItem} />
+          <div className="flex justify-end">
+            <button className="bg-orange-500 text-white px-6 py-3 rounded">
+              Add to Cart
+            </button>
           </div>
-
-          {/* Buy now button */}
-          <button className="group bg-gray-800 mt-4 w-full flex justify-center hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3">
-            <FaHeart className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
-            Buy Now
-          </button>
         </div>
       </div>
     </div>
