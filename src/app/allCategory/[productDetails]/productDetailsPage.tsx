@@ -1,6 +1,7 @@
 "use client";
 
 import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
+import ToastAddToCart from "@/components/toastAddToCart";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -343,52 +344,77 @@ const ProductDetailsPage = () => {
             <span className="mr-3 text-base font-semibold text-black">
               Color
             </span>
-            {product.availableSizes.map((size, index) => (
+            {product.availableColors.map((color, index) => (
+              <button
+                key={index}
+                className={`border-2 rounded-full w-6 h-6 focus:border-black focus:outline-none active:border-black mr-1 capitalize`}
+                style={{ backgroundColor: color }}
+                onClick={() => setCartItem({ ...cartItem, color })}
+              />
+            ))}
+          </div>
+
+          {/* Size selection */}
+          <div className="flex items-center mb-5">
+            <span className="mr-3 text-base font-semibold text-black">
+              Size
+            </span>
+            <div className="form-control w-fit">
+              <select
+                className="select select-bordered"
+                defaultValue={cartItem.size}
+                onChange={(e) =>
+                  setCartItem({ ...cartItem, size: e.target.value })
+                }
+              >
+                <option disabled>Select Size</option>
+                {product.availableSizes.map((size, index) => (
                   <option key={index} value={size}>
                     {size}
                   </option>
                 ))}
-              </div >
+              </select>
             </div>
           </div>
 
-          {/* Quantity controls */}
+          {/* Quantity control */}
           <div className="flex items-center mb-5">
             <span className="mr-3 text-base font-semibold text-black">
               Quantity
             </span>
-            <div className="flex items-center border rounded">
+            <div className="flex items-center border border-gray-300 rounded">
               <button
-                className="p-2"
                 onClick={() => handleQuantityChange("decrement")}
+                className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
               >
-                <FaMinus />
+                <FaMinus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
               </button>
-              <span className="p-2">{cartItem.quantity}</span>
+              <span className="px-4">{cartItem.quantity}</span>
               <button
-                className="p-2"
                 onClick={() => handleQuantityChange("increment")}
+                className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
               >
-                <FaPlus />
+                <FaPlus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
               </button>
             </div>
           </div>
 
-          {/* Price display */}
-          <div className="mt-4 text-2xl font-semibold text-black">
-            ${cartItem.price.toFixed(2)}
+          {/* Add to cart */}
+          <div className="flex justify-between items-center">
+            <span className="text-2xl font-semibold tracking-tight text-black">
+              ${cartItem.price * cartItem.quantity}
+            </span>
+            <ToastAddToCart cartItem={cartItem} />
           </div>
 
-          {/* Add to Cart button */}
-          <button
-            className="mt-6 bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
-            onClick={() => alert("Added to Cart!")}
-          >
-            Add to Cart <FaHeart className="inline ml-2" />
+          {/* Buy now button */}
+          <button className="group bg-gray-800 mt-4 w-full flex justify-center hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3">
+            <FaHeart className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
+            Buy Now
           </button>
         </div>
-     
-   
+      </div>
+    </div>
   );
 };
 
