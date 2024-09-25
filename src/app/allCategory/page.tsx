@@ -162,7 +162,7 @@ const AllCategory = () => {
       alt: "Gold Cubic Zirconia Bezel Hoops",
       title: "Gold Cubic Zirconia Bezel Hoops",
       productDetails: "Gold-Cubic-Bezel-Hoops",
-      price: 40.90,
+      price: 40.9,
       allCategory: "Accessories",
       description:
         "Every accessories closet needs hoop earrings. And if you're already stocked up on classic hoops, might we tempt you with these studded hoop earrings for a statement look? With bezels surrounding the shape, you'll be sure to turn heads each time you wear them. ",
@@ -215,8 +215,7 @@ const AllCategory = () => {
     },
   ];
 
-
-    useEffect(() => {
+  useEffect(() => {
     setIsMounted(true);
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -226,13 +225,15 @@ const AllCategory = () => {
   }, []);
 
   if (!isMounted) {
-    return <div className="h-64 flex justify-center items-center">Loading...</div>; // Placeholder during SSR
+    return (
+      <div className="h-64 flex justify-center items-center">Loading...</div>
+    ); 
   }
 
   return (
     <>
       {isLoading ? (
-        <div className="flex flex-row mt-24 justify-center items-center h-64">
+        <div className="flex flex-row  mt-64 md:mt-52 justify-center items-center h-full">
           <p className="text-lg font-semibold text-gray-700 mb-4">
             Loading products...
           </p>

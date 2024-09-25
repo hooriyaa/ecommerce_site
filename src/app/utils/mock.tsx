@@ -1,5 +1,3 @@
-// import { Product } from "./types";
-
 export const products = [
   {
     id: 1,
@@ -60,7 +58,8 @@ export const products = [
     productDetails: "Woven Crossbody Bag",
     price: 29.99,
     allCategory: "bags",
-    description: "Perfectly woven for every day, the classic crossbody is the ideal day-to-night bag. Match it back to the coordinating shoes for a full look. ",
+    description:
+      "Perfectly woven for every day, the classic crossbody is the ideal day-to-night bag. Match it back to the coordinating shoes for a full look. ",
     color: ["Black"],
     size: ["One Size"],
     quantity: 1,
@@ -79,5 +78,3 @@ export const products = [
     quantity: 1,
   },
 ];
-
-

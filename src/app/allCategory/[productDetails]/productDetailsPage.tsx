@@ -270,13 +270,11 @@ const products = [
 ];
 
 const ProductDetailsPage = () => {
-  const params = useParams(); // Get dynamic route params
+  const params = useParams();
   const { productDetails } = params;
 
-  // Find the product by matching the dynamic route param
   const product = products.find((p) => p.productDetails === productDetails);
 
-  // Ensure product is available
   const initialProduct = product || {
     title: "",
     src: "",
@@ -299,7 +297,6 @@ const ProductDetailsPage = () => {
     quantity: number;
   };
 
-  // Initialize cart item state
   const [cartItem, setCartItem] = useState<CartItem>({
     title: initialProduct.title,
     image: initialProduct.src,
@@ -411,7 +408,6 @@ const ProductDetailsPage = () => {
             </div>
           </div>
 
-          {/* Add to cart */}
           {/* Add to cart */}
           <div className="flex justify-between items-center">
             <span className="text-2xl font-semibold tracking-tight text-black">

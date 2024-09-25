@@ -5,7 +5,6 @@ import Image from "next/image";
 import { FaHeart } from "react-icons/fa";
 import { TbListDetails } from "react-icons/tb";
 
-
 interface BestSellingCardProps {
   src: string;
   alt: string;
@@ -23,15 +22,15 @@ const BestSellingCard: React.FC<BestSellingCardProps> = ({
   productDetails,
 }) => {
   const [hydrated, setHydrated] = useState(false);
- 
 
   useEffect(() => {
-    setHydrated(true); // Indicate that client-side hydration is complete
+    setHydrated(true);
   }, []);
 
-  // Delay rendering until hydration is complete
   if (!hydrated) {
-    return <div className="w-[350px] h-[35rem] mx-auto p-4 shadow-md rounded-xl relative group bg-gray-200"></div>; // Placeholder UI to avoid mismatch
+    return (
+      <div className="w-[350px] h-[35rem] mx-auto p-4 shadow-md rounded-xl relative group bg-gray-200"></div>
+    ); // Placeholder UI to avoid mismatch
   }
 
   return (
@@ -74,6 +73,5 @@ const BestSellingCard: React.FC<BestSellingCardProps> = ({
     </div>
   );
 };
-
 
 export default BestSellingCard;

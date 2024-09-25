@@ -5,45 +5,44 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaRegTrashAlt, FaPlus, FaMinus } from "react-icons/fa";
 
-
-
 const Cartcard = () => {
-  const cartItems = useAppSelector(state => state.cart);
+  const cartItems = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
   return (
     <>
       {cartItems.length > 0 ? (
         cartItems.map((item, index) => (
-          <div key={index} className="flex px-10 py-3">
+          <div key={index} className="flex flex-row px-3 py-1 items-center">
             {/* Image */}
             <Image
               src={Array.isArray(item.image) ? item.image[0] : item.image}
               alt={item.title}
               height={300}
               width={300}
-              className="w-[300px] h-[280px] object-contain"
+              className="w-[170px] md:w-[300px] h-[280px] object-contain"
             />
 
-            <div className="flex px-5 w-full items-center justify-between">
-              <div>
+            {/* Content */}
+            <div className="flex flex-col md:flex-row pl-9 w-full items-center justify-between mt-4 md:mt-0">
+              <div className="w-full md:w-auto">
                 {/* Title */}
-                <h2 className="mt-2 text-gray-600 font-medium text-xl leading-6 line-clamp-1">
+                <h2 className="mt-2 text-gray-600 font-medium text-lg md:text-xl leading-6 line-clamp-1">
                   {item.title}
                 </h2>
 
                 {/* Size */}
-                <h2 className="mt-2 text-black font-medium text-lg leading-none">
+                <h2 className="mt-2 text-black font-medium text-md md:text-lg leading-none">
                   Size:&nbsp;<span>{item.size}</span>
                 </h2>
 
                 {/* Color */}
-                <h2 className="mt-2 text-black font-medium text-lg mr-6 leading-none">
+                <h2 className="mt-2 text-black font-medium text-md md:text-lg leading-none">
                   Color:&nbsp;
                   <span>
                     <button
                       key={index}
-                      className={`border-2 rounded-full w-5 h-5`}
+                      className="border-2 rounded-full w-5 h-5"
                       style={{ backgroundColor: item.color }}
                     />
                   </span>
@@ -71,32 +70,30 @@ const Cartcard = () => {
                 {/* Mobile Price and Delete */}
                 <div className="md:hidden flex flex-col gap-2 mt-3 items-start">
                   <h2 className="text-lg text-black font-semibold line-clamp-1 leading-none">
-                    <span>Price:&nbsp;</span>
-                    {`$${item.price * item.quantity}`}
+                    <span>Price:&nbsp;</span>${item.price * item.quantity}
                   </h2>
                   <FaRegTrashAlt
                     onClick={() => dispatch(deleteItem(item.uuid))}
-                    className="text-xl text-red-500 cursor-pointer leading-none line-clamp-1 font-semibold"
+                    className="text-xl text-red-500 cursor-pointer leading-none font-semibold"
                   />
                 </div>
               </div>
 
               {/* Desktop Price and Delete */}
-              <div className="hidden flex-col md:flex gap-2 mt-3 items-start">
+              <div className="hidden md:flex flex-col gap-2 mt-3 md:mt-0 items-start">
                 <h2 className="text-lg text-black font-semibold line-clamp-1 leading-none">
-                  <span>Price:&nbsp;</span>
-                  {`$${item.price * item.quantity}`}
+                  <span>Price:&nbsp;</span>${item.price * item.quantity}
                 </h2>
                 <FaRegTrashAlt
                   onClick={() => dispatch(deleteItem(item.uuid))}
-                  className="text-xl text-red-500 cursor-pointer leading-none line-clamp-1 font-semibold"
+                  className="text-xl text-red-500 cursor-pointer font-semibold"
                 />
               </div>
             </div>
           </div>
         ))
-      ) :  (
-        <div className="flex flex-col items-center justify-center pb-6">
+      ) : (
+        <div className="flex flex-col  items-center justify-center pt-7 md:pt-1">
           <Image
             src="/pictures/emptyCart.jpg" // Replace with your empty cart image
             alt="Empty Cart"
