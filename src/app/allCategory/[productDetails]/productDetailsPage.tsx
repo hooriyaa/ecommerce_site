@@ -303,6 +303,17 @@ const ProductDetailsPage = () => {
     quantity: product.quantity,
   });
 
+
+  const handleQuantityChange = (action: "increment" | "decrement") => {
+    setCartItem((prev) => {
+      let newQuantity = prev.quantity;
+      if (action === "increment") newQuantity += 1;
+      if (action === "decrement" && newQuantity > 1) newQuantity -= 1; // Prevent negative quantity
+
+      return { ...prev, quantity: newQuantity };
+    });
+  };
+
   return (
     <div className="container mx-auto px-5 py-10">
       <div className="flex flex-col md:flex-row lg:space-x-8 space-y-6 lg:space-y-0 lg:w-4/5 mx-auto">
@@ -367,29 +378,24 @@ const ProductDetailsPage = () => {
             </div>
           </div>
 
-          {/* Quantity control */}
-          <div className="flex items-center mt-4">
+                  {/* Quantity control */}
+                  <div className="flex items-center mt-4">
             <span className="mr-3 text-base font-semibold">Quantity:</span>
-            <button
-              className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
-              onClick={() =>
-                setCartItem((prev) => ({
-                  ...prev,
-                  quantity: Math.max(1, prev.quantity - 1), // Prevent going below 1
-                }))
-              }
-            >
-              <FaMinus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
-            </button>
-            <div className="mx-2">{cartItem.quantity}</div>
-            <button
-              className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
-              onClick={() =>
-                setCartItem({ ...cartItem, quantity: cartItem.quantity + 1 })
-              }
-            >
-              <FaPlus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
-            </button>
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={() => handleQuantityChange("decrement")}
+                  className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
+              >
+                <FaMinus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
+              </button>
+              <span className="text-base">{cartItem.quantity}</span>
+              <button
+                onClick={() => handleQuantityChange("increment")}
+                  className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
+              >
+                <FaPlus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
+              </button>
+            </div>
           </div>
 
           {/* Add to cart */}
