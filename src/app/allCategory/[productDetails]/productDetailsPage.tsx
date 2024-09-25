@@ -4,7 +4,7 @@ import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
 import ToastAddToCart from "@/components/toastAddToCart";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 // Sample product data
 const products = [
@@ -298,11 +298,10 @@ const ProductDetailsPage = () => {
     productDetails: product.productDetails,
     price: product.price,
     allCategory: product.allCategory,
-    size: product.availableSizes[0] || "",  // Ensure there is a default value
+    size: product.availableSizes[0] || "", // Ensure there is a default value
     color: product.availableColors[0] || "", // Ensure there is a default value
     quantity: product.quantity,
   });
-
 
   const handleQuantityChange = (action: "increment" | "decrement") => {
     setCartItem((prev) => {
@@ -378,22 +377,24 @@ const ProductDetailsPage = () => {
             </div>
           </div>
 
-                  {/* Quantity control */}
-                  <div className="flex items-center mt-4">
-            <span className="mr-3 text-base font-semibold">Quantity:</span>
-            <div className="flex items-center space-x-3">
+          {/* Quantity control */}
+          <div className="flex items-center mb-5">
+            <span className="mr-3 text-base font-semibold text-black">
+              Quantity
+            </span>
+            <div className="flex items-center border border-gray-300 rounded">
               <button
                 onClick={() => handleQuantityChange("decrement")}
-                  className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
+                       className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
               >
-                <FaMinus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
+                <FaMinus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300"/>
               </button>
-              <span className="text-base">{cartItem.quantity}</span>
+              <span className="px-4">{cartItem.quantity}</span>
               <button
                 onClick={() => handleQuantityChange("increment")}
-                  className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
+               className="group bg-gray-800 flex hover:bg-transparent text-white rounded-xl hover:text-black text-sm p-3"
               >
-                <FaPlus className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
+                <FaPlus  className="mr-2 h-4 w-4 group-hover:text-orange-500 duration-300" />
               </button>
             </div>
           </div>
