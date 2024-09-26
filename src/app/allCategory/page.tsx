@@ -226,14 +226,14 @@ const AllCategory = () => {
 
   if (!isMounted) {
     return (
-      <div className="h-full bg-orange-100 flex justify-center items-center">Loading...</div>
+      <div className="max-h-screen bg-orange-100 flex justify-center items-center">Loading...</div>
     );
   }
 
   return (
     <>
       {isLoading ? (
-        <div className="flex flex-row mt-64 md:mt-52 justify-center items-center h-full">
+        <div className="flex flex-row mt-64 md:mt-52 justify-center items-center max-h-screen">
           <p className="text-lg font-semibold text-gray-700 mb-4 md:mb-0">
             Loading products...
           </p>

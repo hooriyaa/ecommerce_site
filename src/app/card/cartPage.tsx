@@ -14,7 +14,7 @@ const CartPage = () => {
   );
 
   return (
-    <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 h-full bg-white  md:pt-8 ">
+    <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 max-h-screen bg-white  md:pt-8 ">
       {/* items */}
       <div className="col-span-2 ">
         <Cartcard />
