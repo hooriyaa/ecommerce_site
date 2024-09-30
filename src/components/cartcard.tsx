@@ -13,7 +13,7 @@ const Cartcard = () => {
     <>
       {cartItems.length > 0 ? (
         cartItems.map((item, index) => (
-          <div key={index} className="flex flex-row px-3 py-1 items-center">
+          <div key={index} className="flex flex-row px-3 py-1 items-center bg-white">
             {/* Image */}
             <Image
               src={Array.isArray(item.image) ? item.image[0] : item.image}
@@ -24,7 +24,7 @@ const Cartcard = () => {
             />
 
             {/* Content */}
-            <div className="flex flex-col md:flex-row pl-9 w-full items-center justify-between mt-4 md:mt-0">
+            <div className="flex flex-col md:flex-row pl-9 w-full items-center justify-between mt-4 md:mt-0 bg-white">
               <div className="w-full md:w-auto">
                 {/* Title */}
                 <h2 className="mt-2 text-gray-600 font-medium text-lg md:text-xl leading-6 line-clamp-1">
