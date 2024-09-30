@@ -13,7 +13,7 @@ const Cartcard = () => {
     <>
       {cartItems.length > 0 ? (
         cartItems.map((item, index) => (
-          <div key={index} className="flex flex-row px-3 py-1 items-center bg-white">
+          <div key={index} className="flex flex-row px-3 py-1 items-center bg-white w-full">
             {/* Image */}
             <Image
               src={Array.isArray(item.image) ? item.image[0] : item.image}
@@ -93,20 +93,20 @@ const Cartcard = () => {
           </div>
         ))
       ) : (
-        <div className="flex flex-col  items-center justify-center pt-7 md:pt-1">
+        <div className="flex flex-col items-center justify-center pt-7 md:pt-1">
           <Image
             src="/pictures/emptyCart.jpg" // Replace with your empty cart image
             alt="Empty Cart"
             width={400}
             height={400}
-            className="h-48 w-96 object-contain "
+            className="h-48 w-96 object-contain"
           />
           <h2 className="mt-4 text-2xl font-semibold text-gray-700">
             Your Cart is Empty
           </h2>
           <p className="mt-2 px-6 text-gray-600 font-medium text-base leading-none">
             It looks like you have not added anything to your cart. Go ahead and
-            explore top category.
+            explore top categories.
           </p>
           <button className="bg-orange-500 text-white hover:text-orange-500 hover:bg-transparent lg:text-lg duration-300 scroll-m-20 text-base hover:shadow-md font-semibold tracking-tight p-4 capitalize rounded-xl px-8 mt-5">
             <Link href={"/allCategory"}>Continue Shopping</Link>

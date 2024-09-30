@@ -14,24 +14,24 @@ const CartPage = () => {
   );
 
   return (
-    <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 max-h-screen bg-white  md:pt-8 ">
+    <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 min-h-screen bg-white md:pt-8">
       {/* items */}
-      <div className="col-span-2 ">
+      <div className="col-span-2 bg-white">
         <Cartcard />
       </div>
       {/* order summary */}
-      <div className="bg-orange-50 p-6  justify-center ml-4  items-center pt-14 h-fit w-full rounded-xl ">
+      <div className="bg-orange-50 p-6 justify-center ml-4 items-center pt-14 h-fit w-full rounded-xl">
         {/* heading */}
-        <h1 className="scroll-m-20 text-lg capitalize lg:text-2xl  text-black font-semibold tracking-tight ">
+        <h1 className="scroll-m-20 text-lg capitalize lg:text-2xl text-black font-semibold tracking-tight">
           Order Summary
         </h1>
         {/* divider */}
-        <div className="divider mt-0 mb-1 "></div>
+        <div className="divider mt-0 mb-1"></div>
         {/* Pricing */}
-        <div className=" text-sm lg:text-lg font-medium tracking-tight text-black">
+        <div className="text-sm lg:text-lg font-medium tracking-tight text-black">
           {/* product prices */}
           <div className="flex justify-between items-center capitalize">
-            <h2>sub total</h2>
+            <h2>Sub Total</h2>
             <h2>${cartTotal}</h2>
           </div>
           {/* delivery charges  */}
@@ -46,16 +46,16 @@ const CartPage = () => {
           </div>
         </div>
         {/* divider */}
-        <div className="divider mt-0 mb-1 "></div>
+        <div className="divider mt-0 mb-1"></div>
         {/* estimated total */}
         <div className="flex justify-between items-center text-sm lg:text-lg tracking-tight text-gray-800 font-semibold capitalize">
-          <h2>Estimated total</h2>
+          <h2>Estimated Total</h2>
           <h2>${cartTotal}</h2>
         </div>
         {/* divider */}
-        <div className="divider mt-4 mb-1 "></div>
-        {/* checkout  button */}
-        <div className="flex justify-center pb-8  items-center w-full">
+        <div className="divider mt-4 mb-1"></div>
+        {/* checkout button */}
+        <div className="flex justify-center pb-8 items-center w-full">
           <button className="bg-orange-500 text-white hover:text-orange-500 hover:bg-transparent lg:text-lg duration-300 scroll-m-20 text-base hover:shadow-md font-semibold tracking-tight p-4 capitalize rounded-xl px-8">
             Proceed To Checkout
           </button>
